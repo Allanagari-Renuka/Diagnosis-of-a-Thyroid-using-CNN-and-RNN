@@ -8,7 +8,9 @@ import logging
 
 # Initialize Flask app with static folder
 # app = Flask(__name__, static_folder=os.path.abspath('../client/public'), static_url_path='')
-app = Flask(__name__, static_folder=os.path.abspath('../client/dist'), static_url_path='')
+#app = Flask(__name__, static_folder=os.path.abspath('../client/dist'), static_url_path='')
+app = Flask(__name__, static_folder=os.path.abspath('../client/build'), static_url_path='')
+
 CORS(app)
 
 # Configure logging
@@ -144,9 +146,14 @@ def get_specialists():
 # def serve():
 #     return app.send_static_file('index.html')
 
-@app.route('/')
-def serve():
-    return app.send_static_file('index.html')
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, "index.html")
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
