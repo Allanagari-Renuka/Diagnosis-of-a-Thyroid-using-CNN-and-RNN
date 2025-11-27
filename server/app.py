@@ -7,10 +7,9 @@ import time
 import logging
 
 # Initialize Flask app with static folder
-# app = Flask(__name__, static_folder=os.path.abspath('../client/public'), static_url_path='')
-#app = Flask(__name__, static_folder=os.path.abspath('../client/dist'), static_url_path='')
-app = Flask(__name__, static_folder=os.path.abspath('../client/build'), static_url_path='')
-
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BUILD_DIR = os.path.join(BASE_DIR, '..', 'client', 'build')
+app = Flask(__name__, static_folder=BUILD_DIR, static_url_path='')
 CORS(app)
 
 # Configure logging
@@ -151,8 +150,8 @@ def get_specialists():
 def serve(path):
     if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, "index.html")
+
+    return send_from_directory(app.static_folder, "index.html")
 
 
 if __name__ == '__main__':
