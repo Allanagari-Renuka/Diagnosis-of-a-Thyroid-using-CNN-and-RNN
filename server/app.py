@@ -6,9 +6,6 @@ from werkzeug.utils import secure_filename
 import time
 import logging
 
-# ---------------------------
-# PATH SETUP FOR RENDER
-# ---------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_BUILD = os.path.join(BASE_DIR, "..", "client", "build")
 
@@ -32,9 +29,8 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# ---------------------------
+
 # MOCK AUTH SYSTEM
-# ---------------------------
 users_db = {}
 
 
@@ -70,9 +66,8 @@ def login():
     return jsonify({"message": "Login successful", "token": "mock-token-123"})
 
 
-# ---------------------------
+
 # API ENDPOINTS
-# ---------------------------
 @app.route("/api/health", methods=["GET"])
 def health_check():
     return jsonify(
@@ -139,10 +134,7 @@ def get_specialists():
     ]
     return jsonify(specialists)
 
-
-# ---------------------------
 # SERVE REACT FRONTEND BUILD
-# ---------------------------
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve(path):
@@ -154,9 +146,7 @@ def serve(path):
     return send_from_directory(CLIENT_BUILD, "index.html")
 
 
-# ---------------------------
 # MAIN ENTRY
-# ---------------------------
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
