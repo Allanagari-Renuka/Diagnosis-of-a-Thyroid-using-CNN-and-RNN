@@ -2,6 +2,7 @@
 
 A deep learning-based medical diagnosis system that uses Convolutional Neural Networks (CNN) and Recurrent Neural Networks (RNN) to detect and classify thyroid diseases from medical imaging and patient data.
 
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://diagnosis-of-a-thyroid-using-cnn-and-rnn-f7ku.onrender.com/)
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
